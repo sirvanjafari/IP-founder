@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Network Info</title>
+    <style>
+        body { background: #121212; color: #00e676; font-family: monospace; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .container { border: 1px solid #00e676; padding: 20px; border-radius: 10px; width: 300px; }
+    </style>
+</head>
+<body>
+    <div class="container" id="info">
+        <h3>Loading data...</h3>
+    </div>
+
+    <script>
+        // دریافت اطلاعات از API رایگان
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                let result = "";
+                result = result + "IP: " + data.ip + "<br>";
+                result = result + "City: " + data.city + "<br>";
+                result = result + "Region: " + data.region + "<br>";
+                result = result + "ISP: " + data.org + "<br>";
+                result = result + "Browser: " + navigator.userAgent;
+                
+                document.getElementById('info').innerHTML = "<h3>System Info:</h3>" + result;
+            })
+            .catch(error => {
+                document.getElementById('info').innerHTML = "Error loading data.";
+            });
+    </script>
+</body>
+</html>
